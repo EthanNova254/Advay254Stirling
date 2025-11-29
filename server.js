@@ -5,28 +5,27 @@ const upload = multer({ storage: multer.memoryStorage() });
 const app = express();
 app.use(express.json());
 
-const htmlToPdfRoute = require('./routes/htmlToPdf');
-const textToPdfRoute = require('./routes/textToPdf');
-const imageToPdfRoute = require('./routes/imageToPdf');
-const mergePdfRoute = require('./routes/mergePdf');
-const splitPdfRoute = require('./routes/splitPdf');
-const watermarkPdfRoute = require('./routes/watermarkPdf');
-const compressPdfRoute = require('./routes/compressPdf');
-const metadataPdfRoute = require('./routes/metadataPdf');
-const thumbnailsRoute = require('./routes/thumbnails');
-const mergeFromUrlsRoute = require('./routes/mergeFromUrls');
+const htmlToPdf = require('./routes/htmlToPdf');
+const textToPdf = require('./routes/textToPdf');
+const imageToPdf = require('./routes/imageToPdf');
+const mergePdf = require('./routes/mergePdf');
+const splitPdf = require('./routes/splitPdf');
+const watermarkPdf = require('./routes/watermarkPdf');
+const compressPdf = require('./routes/compressPdf');
+const metadataPdf = require('./routes/metadataPdf');
+const thumbnails = require('./routes/thumbnails');
+const mergeFromUrls = require('./routes/mergeFromUrls');
 
-// Routes
-app.use('/api/html-to-pdf', upload.single('file'), htmlToPdfRoute);
-app.use('/api/text-to-pdf', textToPdfRoute);
-app.use('/api/image-to-pdf', upload.single('file'), imageToPdfRoute);
-app.use('/api/merge-pdf', upload.array('files'), mergePdfRoute);
-app.use('/api/split-pdf', upload.single('file'), splitPdfRoute);
-app.use('/api/watermark-pdf', upload.single('file'), watermarkPdfRoute);
-app.use('/api/compress-pdf', upload.single('file'), compressPdfRoute);
-app.use('/api/set-metadata', upload.single('file'), metadataPdfRoute);
-app.use('/api/pdf-thumbnail', upload.single('file'), thumbnailsRoute);
-app.use('/api/merge-pdf-urls', mergeFromUrlsRoute);
+app.use('/api/html-to-pdf', upload.single('file'), htmlToPdf);
+app.use('/api/text-to-pdf', textToPdf);
+app.use('/api/image-to-pdf', upload.single('file'), imageToPdf);
+app.use('/api/merge-pdf', upload.array('files'), mergePdf);
+app.use('/api/split-pdf', upload.single('file'), splitPdf);
+app.use('/api/watermark-pdf', upload.single('file'), watermarkPdf);
+app.use('/api/compress-pdf', upload.single('file'), compressPdf);
+app.use('/api/set-metadata', upload.single('file'), metadataPdf);
+app.use('/api/pdf-thumbnail', upload.single('file'), thumbnails);
+app.use('/api/merge-pdf-urls', mergeFromUrls);
 
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => console.log(`Stirling PDF backend running on port ${PORT}`));
